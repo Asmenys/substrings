@@ -1,5 +1,5 @@
 require 'pry-byebug'
-words = "Howdy partner, sit down! How's it going?"
+words = gets.chomp
 dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
 def lowerCase(string)
     string.downcase
@@ -25,15 +25,14 @@ def to_array(string)
 end
 
 def compare(word_array,dictionary)
-dictionary.reduce(Hash.new(0)) do |result_hash, word|
-    if(word_array.any?(/#{word}/))
-        #binding.pry
-        i = word_array.count(word)
-        result_hash[word] += i
-        result_hash
-    end
+    word_array = word_array.join(" ")
+dictionary.reduce(Hash.new(0)) do |result_hash, dictWord|
+scan_res = word_array.scan(/#{dictWord}/).size
+if scan_res>0
+    result_hash[dictWord]=scan_res
     result_hash
-
+end
+result_hash
 end
 end
 
